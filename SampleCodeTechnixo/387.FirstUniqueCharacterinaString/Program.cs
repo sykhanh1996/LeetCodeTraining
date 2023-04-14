@@ -5,17 +5,24 @@ Console.WriteLine(result);
 Console.ReadLine();
 int firstUniqChar(string s)
 {
-    var dic = new Dictionary<int, string>();
-    for (int i = 0; i < s.Length; i++)
+    char[] arr = s.ToCharArray();
+    int[] count = new int[123];
+
+    for (int i = 0; i < arr.Length; i++)
     {
-        dic[i] = s[i].ToString();
+        char c = arr[i];
+        int index = (int)c;
+        count[index]++;
     }
 
-    var distinct = dic.Distinct();
-    foreach (var item in distinct.OrderBy(x=>x.Key))
+    for (int i = 0; i < arr.Length; i++)
     {
-        return item.Key;
+        char c = arr[i];
+        int index = (int)c;
+        if (count[index] == 1)
+        {
+            return i;
+        }
     }
-
     return -1;
 }
